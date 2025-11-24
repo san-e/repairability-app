@@ -55,7 +55,7 @@ document.getElementById("device-form").addEventListener("submit", e => {
     id: editingId || Date.now(),
     name: document.getElementById("name").value,
     category: document.getElementById("category").value,
-    age: Number(document.getElementById("age".value)) || 0,
+    age: Number(document.getElementById("age").value) || 0,
     usage: Number(document.getElementById("usage").value) || 0,
     importance: Number(document.getElementById("importance").value),
     notes: document.getElementById("notes").value,
@@ -88,7 +88,7 @@ function calculateSustainability(devices) {
     for (const device in devices) {
         sum += devices[device].repairIndex      
     }
-    console.log(devices.length)
+    console.log(devices.length + " devices loaded.")
     return sum/devices.length;
 }
 
