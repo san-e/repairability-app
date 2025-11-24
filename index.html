@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Device Repairability Manager</title>
+  <link rel="stylesheet" href="./style.css" />
+  <script src="./script.js" defer></script>
+</head>
+<body>
+
+<h1>Device Repairability Manager</h1>
+
+<h2>Your Score</h2>
+<div class="card">
+    Your personal sustainability score is: <span id="sustainability-val"></span>
+</div>
+
+<h2>Devices</h2>
+
+<div class="card flex">
+  <input id="search" placeholder="Search name/category">
+  <select id="sort">
+    <option value="newest">Newest</option>
+    <option value="repair-high">Repairability (high→low)</option>
+    <option value="repair-low">Repairability (low→high)</option>
+  </select>
+  <button onclick="exportCSV()">Export CSV</button>
+</div>
+
+<div id="device-list"></div>
+
+<p>Add devices and calculate a repairability index (0–100).</p>
+
+<div class="card">
+  <h2 id="form-title">Add Device</h2>
+
+  <form id="device-form" class="col" style="gap:10px;">
+    <input id="name" placeholder="Device name" required />
+    <input id="category" placeholder="Category (phone, laptop…)" />
+
+    <div class="flex">
+      <input id="age" type="number" placeholder="Age (years)" min="0" step="0.1" />
+      <input id="usage" type="number" placeholder="Usage hrs/week" min="0" />
+    </div>
+
+    <label>Importance: <span id="importance-val">5</span>/10</label>
+    <input id="importance" type="range" min="0" max="10" value="5"
+           oninput="document.getElementById('importance-val').textContent=this.value">
+
+    <textarea id="notes" rows="3" placeholder="Notes"></textarea>
+
+    <h3>Repairability Criteria (0–10)</h3>
+
+    <div id="criteria-container" class="col" style="gap:8px;"></div>
+
+    <button class="btn-primary" type="submit" id="submit-btn">Add Device</button>
+  </form>
+</div>
+
+</body>
+</html>

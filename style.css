@@ -1,0 +1,49 @@
+body {
+    font-family: "Courier New", "Open Sans", Arial;
+    background:#303030;
+    padding:20px;
+}
+
+.bar {
+    transform: translate(0px, 13px);
+}
+
+.card {
+    background:rgb(13, 13, 13); 
+    padding:15px;
+    border-radius:10px;
+    margin-bottom:15px;
+}
+
+.flex {
+    display:flex;
+    gap:10px;
+}
+
+.col {
+    display:flex;
+    flex-direction:column;
+}
+
+input, select, textarea {
+    padding:6px;
+    border-radius:6px;
+    border:1px solid #bbb;
+}
+
+button {
+    padding:8px 12px;
+    border-radius:6px;
+    border:none;
+    cursor:pointer;
+}
+
+.btn-primary {
+    background:#0078ff;
+    color:white;
+}
+
+.btn-danger {
+    background:#d33;
+    color:white;
+}
