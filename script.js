@@ -174,31 +174,14 @@ function deleteDevice(id) {
   renderList();
 }
 
-/* -----------------------------
-   EXPORT CSV
---------------------------------*/
-function exportCSV() {
-  const header = [
-    "id","name","category","age","usage","importance",
-    ...CRITERIA.map(c=>c.key), "repairIndex","notes","createdAt"
-  ];
-
-  const rows = devices.map(d => [
-    d.id, d.name, d.category, d.age, d.usage, d.importance,
-    ...CRITERIA.map(c=>d.criteria[c.key]),
-    d.repairIndex, d.notes, d.createdAt
-  ]);
-
-  const csv = [header, ...rows]
-    .map(r => r.map(cell => `"${String(cell).replace(/"/g,'""')}"`).join(","))
-    .join("\n");
-
-  const blob = new Blob([csv], { type:"text/csv" });
+function exportJSON() {
+  let json = localStorage.getItem("devices");
+  const blob = new Blob([json], { type:"text/json" });
   const url = URL.createObjectURL(blob);
 
   const a = document.createElement("a");
   a.href = url;
-  a.download = "devices.csv";
+  a.download = "devices.json";
   a.click();
   URL.revokeObjectURL(url);
 }
