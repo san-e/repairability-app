@@ -36,7 +36,8 @@ function save() {
   localStorage.setItem("devices", JSON.stringify(devices));
 }
 
-function calculateIndex(criteria) {
+function calculateIndex(device) {
+  critera = device.criteria;
   let sum = 0;
   CRITERIA.forEach(c => {
     sum += (criteria[c.key] / 10) * c.weight;
@@ -67,7 +68,7 @@ document.getElementById("device-form").addEventListener("submit", e => {
     device.criteria[c.key] = Number(document.getElementById(c.key).value);
   });
 
-  device.repairIndex = calculateIndex(device.criteria);
+  device.repairIndex = calculateIndex(device);
 
   if (editingId) {
     devices = devices.map(d => d.id === editingId ? device : d);
@@ -85,11 +86,12 @@ document.getElementById("device-form").addEventListener("submit", e => {
 
 function calculateSustainability(devices) {
     sum = 0;
+    importances = 0;
     for (const device in devices) {
-        sum += devices[device].repairIndex      
+        sum += devices[device].repairIndex * (devices[device].importance / 10);
+        importances += devices[device].importance / 10;
     }
-    console.log(devices.length + " devices loaded.")
-    return sum/devices.length;
+    return sum/importances;
 }
 
 /* -----------------------------
@@ -100,7 +102,7 @@ function renderList() {
   list.innerHTML = "";
 
   const sustainability_val = document.getElementById("sustainability-val");
-  sustainability_val.textContent = calculateSustainability(devices).toString();
+  sustainability_val.textContent = Math.round(calculateSustainability(devices)).toString();
 
   const q = search.value.toLowerCase();
   let items = devices.filter(d =>
