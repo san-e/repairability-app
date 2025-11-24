@@ -25,11 +25,12 @@
     <option value="repair-low">Repairability (low→high)</option>
   </select>
   <button onclick="exportJSON()">Export</button>
+  <button onclick="importJSON()" >Import</button>
 </div>
 
 <div id="device-list" class="device-list"></div>
 
-<p>Add devices and calculate a repairability index (0–100).</p>
+<p>Add devices and calculate a repairability index (0-100).</p>
 
 <div class="card">
   <h2 id="form-title">Add Device</h2>
@@ -49,7 +50,7 @@
 
     <textarea id="notes" rows="3" placeholder="Notes"></textarea>
 
-    <h3>Repairability Criteria (0–10)</h3>
+    <h3>Repairability Criteria (0-10)</h3>
 
     <div id="criteria-container" class="col" style="gap:8px;"></div>
 

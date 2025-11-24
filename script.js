@@ -188,6 +188,38 @@ function exportJSON() {
   URL.revokeObjectURL(url);
 }
 
+function importJSON() {
+  const a = document.createElement("input");
+  a.type = "file";
+
+  a.addEventListener("change", () => {
+    const reader = new FileReader();
+    reader.readAsText(a.files[0]);
+    
+    reader.onload = () => {
+      try {
+        let json = JSON.parse(reader.result);
+        for (const device in json) {
+          if (!json[device].id ||
+              !json[device].name ||
+              !json[device].category ||
+              !json[device].importance ||
+              !json[device].repairIndex) {
+            throw "ValidJSONbutInvalidContent";
+          }
+        }
+        localStorage["devices"] = reader.result;
+        devices = JSON.parse(localStorage.getItem("devices") || "[]");
+        renderList();
+      } catch {
+        alert("Invalid file!");
+    }
+    }
+  });
+
+  a.click();
+}
+
 /* -----------------------------
    INITIAL RENDER
 --------------------------------*/
