@@ -49,3 +49,10 @@ button {
     background:#d33;
     color:white;
 }
+
+.device-list {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
