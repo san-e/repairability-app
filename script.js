@@ -136,7 +136,7 @@ function renderList() {
 
     card.innerHTML = `
       <h3>${d.deviceName || d.name} (${d.category || "uncategorized"})</h3>
-      <p>Age: ${d.age} yrs — Usage: ${d.usage} hrs/wk — Importance: ${d.importance < 10 ? "0" + d.importance : d.importance}/10</p>
+      <p>Age: ${d.age} yrs — Usage: ${d.usage} hrs/wk — Importance: ${d.importance}/10</p>
       <p><strong>Repairability Index: ${d.repairIndex}</strong></p>
 
       <div style="margin:10px 0;">
@@ -154,6 +154,17 @@ function renderList() {
     `;
 
     list.appendChild(card);
+  });
+
+  let cards = list.childNodes;
+  let maxWidth = 0;
+
+  cards.forEach(card => {
+    if (card.offsetWidth > maxWidth) maxWidth = card.offsetWidth;
+  });
+
+  cards.forEach(card => {
+    card.style.width = maxWidth + 'px';
   });
 }
 
