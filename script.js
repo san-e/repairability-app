@@ -130,12 +130,15 @@ function renderList() {
   else
     items.sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt));
 
-  items.forEach(d => {
+  let hightest_score = Math.max(...items.map(x => x.repairIndex))
+  let min_score = Math.min(...items.map(x => x.repairIndex))
+
+  items.forEach((d, i) => {
     const card = document.createElement("div");
     card.className = "card";
 
     card.innerHTML = `
-      <h3>${d.deviceName || d.name} (${d.category || "uncategorized"})</h3>
+      <h3>${(d.deviceName || d.name) + (d.repairIndex == hightest_score ? "💎" : "") + (d.repairIndex == min_score ? "💩" : "")} (${d.category || "uncategorized"})</h3>
       <p>Age: ${d.age} yrs — Usage: ${d.usage} hrs/wk — Importance: ${d.importance}/10</p>
       <p><strong>Repairability Index: ${d.repairIndex}</strong></p>
 
