@@ -123,7 +123,7 @@ function renderList() {
     card.className = "card";
 
     card.innerHTML = `
-      <h3>${d.deviceName} (${d.category || "uncategorized"})</h3>
+      <h3>${d.deviceName || d.name} (${d.category || "uncategorized"})</h3>
       <p>Age: ${d.age} yrs — Usage: ${d.usage} hrs/wk — Importance: ${d.importance}/10</p>
       <p><strong>Repairability Index: ${d.repairIndex}</strong></p>
 
@@ -201,7 +201,7 @@ function importJSON() {
         let json = JSON.parse(reader.result);
         for (const device in json) {
           if (!json[device].id ||
-              !json[device].deviceName ||
+              !(json[device].deviceName || json[device].name) ||
               !json[device].category ||
               !json[device].importance ||
               !json[device].repairIndex) {
