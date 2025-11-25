@@ -115,6 +115,18 @@ function renderList() {
     items.sort((a,b)=>b.repairIndex-a.repairIndex);
   else if (sort.value === "repair-low")
     items.sort((a,b)=>a.repairIndex-b.repairIndex);
+  else if (sort.value === "importance-high")
+    items.sort((a,b)=>b.importance-a.importance);
+  else if (sort.value === "importance-low")
+    items.sort((a,b)=>a.importance-b.importance);
+  else if (sort.value === "age-high")
+    items.sort((a,b)=>b.age-a.age);
+  else if (sort.value === "age-low")
+    items.sort((a,b)=>a.age-b.age);
+  else if (sort.value === "usage-high")
+    items.sort((a,b)=>b.usage-a.usage);
+  else if (sort.value === "usage-low")
+    items.sort((a,b)=>a.usage-b.usage);
   else
     items.sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt));
 
