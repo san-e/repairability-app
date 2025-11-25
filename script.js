@@ -37,7 +37,7 @@ function save() {
 }
 
 function calculateIndex(device) {
-  critera = device.criteria;
+  criteria = device.criteria;
   let sum = 0;
   CRITERIA.forEach(c => {
     sum += (criteria[c.key] / 10) * c.weight;
