@@ -102,7 +102,8 @@ function renderList() {
   list.innerHTML = "";
 
   const sustainability_val = document.getElementById("sustainability-val");
-  sustainability_val.textContent = "<b>" + Math.round(calculateSustainability(devices)).toString() + "</b>";
+  sustainability_val.textContent = Math.round(calculateSustainability(devices)).toString();
+  sustainability_val.style.fontWeight = 'bold';
 
   const q = search.value.toLowerCase();
   let items = devices.filter(d =>
