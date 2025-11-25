@@ -54,7 +54,7 @@ document.getElementById("device-form").addEventListener("submit", e => {
 
   const device = {
     id: editingId || Date.now(),
-    name: document.getElementById("name").value,
+    deviceName: document.getElementById("deviceName").value,
     category: document.getElementById("category").value,
     age: Number(document.getElementById("age").value) || 0,
     usage: Number(document.getElementById("usage").value) || 0,
@@ -106,7 +106,7 @@ function renderList() {
 
   const q = search.value.toLowerCase();
   let items = devices.filter(d =>
-    d.name?.toLowerCase().includes(q) ||
+    d.deviceName?.toLowerCase().includes(q) ||
     (d.category || "").toLowerCase().includes(q)
   );
 
@@ -123,7 +123,7 @@ function renderList() {
     card.className = "card";
 
     card.innerHTML = `
-      <h3>${d.name} (${d.category || "uncategorized"})</h3>
+      <h3>${d.deviceName} (${d.category || "uncategorized"})</h3>
       <p>Age: ${d.age} yrs — Usage: ${d.usage} hrs/wk — Importance: ${d.importance}/10</p>
       <p><strong>Repairability Index: ${d.repairIndex}</strong></p>
 
@@ -152,7 +152,7 @@ function editDevice(id) {
   const d = devices.find(x => x.id === id);
   editingId = id;
 
-  name.value = d.name;
+  deviceName.value = d.deviceName;
   category.value = d.category;
   age.value = d.age;
   usage.value = d.usage;
@@ -201,7 +201,7 @@ function importJSON() {
         let json = JSON.parse(reader.result);
         for (const device in json) {
           if (!json[device].id ||
-              !json[device].name ||
+              !json[device].deviceName ||
               !json[device].category ||
               !json[device].importance ||
               !json[device].repairIndex) {
