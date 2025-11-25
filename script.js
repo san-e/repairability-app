@@ -106,7 +106,7 @@ function renderList() {
 
   const q = search.value.toLowerCase();
   let items = devices.filter(d =>
-    d.deviceName?.toLowerCase().includes(q) ||
+    d.deviceName?.toLowerCase().includes(q) || d.name?.toLowerCase().includes(q) ||
     (d.category || "").toLowerCase().includes(q)
   );
 
@@ -152,7 +152,7 @@ function editDevice(id) {
   const d = devices.find(x => x.id === id);
   editingId = id;
 
-  deviceName.value = d.deviceName;
+  deviceName.value = d.deviceName || d.name;
   category.value = d.category;
   age.value = d.age;
   usage.value = d.usage;
