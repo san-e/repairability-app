@@ -75,6 +75,10 @@ document.getElementById("device-form").addEventListener("submit", e => {
     editingId = null;
     document.getElementById("form-title").textContent = "Add Device";
     document.getElementById("submit-btn").textContent = "Add Device";
+    CRITERIA.forEach(c => {
+      document.getElementById(c.key).value = 5;
+      document.getElementById(c.key).textContent = "5";
+  });
   } else {
     devices.unshift(device);
   }
