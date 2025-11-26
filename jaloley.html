@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Device Repairability Manager</title>
+  <link rel="stylesheet" href="./style.css" />
+  <script src="./script.js" defer></script>
+  <script>localStorage["devices"] = `[{"id":1764080854760,"deviceName":"Panaosonic Sonicare","category":"Zahnbürste","age":7,"usage":0,"importance":10,"notes":"","criteria":{"accessibility":3,"modularity":2,"spareParts":4,"serviceInfo":3,"softwareLock":9,"economy":5},"createdAt":"2025-11-25T14:27:34.761Z","repairIndex":38},{"id":1764080761937,"deviceName":"PC","category":"PC","age":0,"usage":50,"importance":10,"notes":"selbst zusammengebaut","criteria":{"accessibility":10,"modularity":10,"spareParts":10,"serviceInfo":9,"softwareLock":10,"economy":10},"createdAt":"2025-11-25T14:26:01.937Z","repairIndex":98},{"id":1764080664129,"deviceName":"JBL Go 3","category":"Bluetooth Box","age":2,"usage":6,"importance":8,"notes":"","criteria":{"accessibility":5,"modularity":5,"spareParts":6,"serviceInfo":4,"softwareLock":8,"economy":6},"createdAt":"2025-11-25T14:24:24.129Z","repairIndex":54},{"id":1764080611901,"deviceName":"Samsung Galaxy Buds","category":"Kopfhörer","age":6,"usage":15,"importance":9,"notes":"","criteria":{"accessibility":7,"modularity":6,"spareParts":6,"serviceInfo":5,"softwareLock":6,"economy":6},"createdAt":"2025-11-25T14:23:31.901Z","repairIndex":60},{"id":1764080529195,"deviceName":"Bosch PIF …B…","category":"Herd","age":5,"usage":6,"importance":9,"notes":"","criteria":{"accessibility":5,"modularity":7,"spareParts":8,"serviceInfo":5,"softwareLock":6,"economy":5},"createdAt":"2025-11-25T14:22:09.195Z","repairIndex":61},{"id":1764080453614,"deviceName":"Bosch HBG33B2.0","category":"Backofen","age":5,"usage":1,"importance":2,"notes":"","criteria":{"accessibility":6,"modularity":6,"spareParts":7,"serviceInfo":6,"softwareLock":8,"economy":6},"createdAt":"2025-11-25T14:20:53.614Z","repairIndex":64},{"id":1764080386078,"deviceName":"Premiere EGSP 24668","category":"Geschirrspüler","age":5,"usage":3,"importance":7,"notes":"","criteria":{"accessibility":6,"modularity":6,"spareParts":8,"serviceInfo":5,"softwareLock":9,"economy":7},"createdAt":"2025-11-25T14:19:46.078Z","repairIndex":66},{"id":1764080325214,"deviceName":"Premiere EKS 36164","category":"Kühlschrank","age":5,"usage":168,"importance":10,"notes":"","criteria":{"accessibility":5,"modularity":6,"spareParts":7,"serviceInfo":6,"softwareLock":8,"economy":6},"createdAt":"2025-11-25T14:18:45.214Z","repairIndex":62},{"id":1764065413693,"deviceName":"Samsung Galaxy S21 5g","category":"Handy","age":5,"usage":25,"importance":10,"notes":"","criteria":{"accessibility":6,"modularity":6,"spareParts":6,"serviceInfo":7,"softwareLock":5,"economy":6},"createdAt":"2025-11-25T11:40:00.809Z","repairIndex":61},{"id":1764065290773,"deviceName":"MSI Bravo 15","category":"Laptop","age":3,"usage":5,"importance":7,"notes":"","criteria":{"accessibility":7,"modularity":8,"spareParts":6,"serviceInfo":6,"softwareLock":5,"economy":6},"createdAt":"2025-11-25T11:40:10.540Z","repairIndex":65}]`</script>
+</head>
+<body>
+
+<h1>Device Repairability Manager</h1>
+
+<h2>Your Score</h2>
+<div class="card">
+    Your personal sustainability score is: <span id="sustainability-val"></span>
+</div>
+
+<h2>Devices</h2>
+
+<div class="card flex">
+  <input oninput="renderList()" id="search" placeholder="Search name/category">
+  <select onchange="renderList()" id="sort">
+    <option value="newest">Newest</option>
+    <option value="repair-high">Repairability (high→low)</option>
+    <option value="repair-low">Repairability (low→high)</option>
+    <option value="importance-high">Importance (high→low)</option>
+    <option value="importance-low">Importance (low→high)</option>
+    <option value="age-high">Age (high→low)</option>
+    <option value="age-low">Age (low→high)</option>
+    <option value="usage-high">Usage (high→low)</option>
+    <option value="usage-low">Usage (low→high)</option>
+  </select>
+  <button onclick="exportJSON()">Export</button>
+  <button onclick="importJSON()" >Import</button>
+</div>
+
+<div id="device-list" class="device-list"></div>
+
+<p>Add devices and calculate a repairability index (0-100).</p>
+
+<div class="card">
+  <h2 id="form-title">Add Device</h2>
+
+  <form id="device-form" class="col" style="gap:10px;">
+    <input id="deviceName" placeholder="Device name" required />
+    <input id="category" placeholder="Category (phone, laptop…)" />
+
+    <div class="flex">
+      <input id="age" type="number" placeholder="Age (years)" min="0" step="0.1" />
+      <input id="usage" type="number" placeholder="Usage hrs/week" min="0" />
+    </div>
+
+    <label>Importance: <span id="importance-val">5</span>/10</label>
+    <input id="importance" type="range" min="0" max="10" value="5"
+           oninput="document.getElementById('importance-val').textContent=this.value">
+
+    <textarea id="notes" rows="3" placeholder="Notes"></textarea>
+
+    <h3>Repairability Criteria (0-10)</h3>
+
+    <div id="criteria-container" class="col" style="gap:8px;"></div>
+
+    <button class="btn-primary" type="submit" id="submit-btn">Add Device</button>
+  </form>
+</div>
+
+</body>
+</html>
